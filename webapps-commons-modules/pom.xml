@@ -25,4 +25,11 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <modules>
+        <module>webapps-commons-errors</module>
+        <module>webapps-commons-exceptions</module>
+        <module>webapps-commons-validation-aspects</module>
+        <module>webapps-commons-error-dtos</module>
+    </modules>
 </project>

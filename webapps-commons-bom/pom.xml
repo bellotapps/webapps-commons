@@ -17,5 +17,31 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <modules.version>${project.parent.version}</modules.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>webapps-commons-errors</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>webapps-commons-exceptions</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>webapps-commons-validation-aspects</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>webapps-commons-error-dtos</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
