@@ -7,7 +7,7 @@ Project containing a bunch of commons stuff that can be used for building web ap
 ## Description
 This project contains a bunch of libraries defining and implementing stuff that can be used for building web applications.
 
-## How to use it
+## How to use it?
 
 ### Get it!
 
@@ -35,12 +35,6 @@ $ mvn clean package
 This project includes a Bill Of Materials in order to make it easier to import the libraries. Include the following in your ```pom.xml```.
 
 ```xml
-<properties>
-    <-- ... -->
-    <webapps-commons.version>0.0.1-SNAPSHOT</webapps-commons.version>
-    <-- ... -->
-</properties>
-
 <dependencyManagement>
     <dependencies>
         <-- ... -->
@@ -58,6 +52,27 @@ This project includes a Bill Of Materials in order to make it easier to import t
 
 After adding the ```webapps-commons-bom``` artifact as an imported managed dependency, you can start using the different libraries in your project.
 
+### Dependencies module
+
+This project includes a module defining a set of dependencies that might be used by users of these libraries. It is also used by the rest of the modules in this project.
+
+To use this module, include the following in your ```pom.xml```.
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <-- ... -->
+        <dependency>
+            <groupId>com.bellotapps.webapps</groupId>
+            <artifactId>webapps-commons-dependencies</artifactId>
+            <version>${webapps-commons.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <-- ... -->
+    </dependencies>
+</dependencyManagement>
+```
 
 
 ## Development
