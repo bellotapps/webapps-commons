@@ -67,7 +67,7 @@ public class InvalidPropertiesException extends RuntimeException {
     /**
      * @return The {@link List} holding those properties that does not exist.
      */
-    public List<String> getErrors() {
+    public List<String> getInvalidProperties() {
         return invalidProperties;
     }
 }

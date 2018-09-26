@@ -31,5 +31,10 @@
         <module>webapps-commons-exceptions</module>
         <module>webapps-commons-validation-aspects</module>
         <module>webapps-commons-error-dtos</module>
+        <module>webapps-commons-web-constants</module>
+        <module>webapps-commons-web-exceptions</module>
+        <module>webapps-commons-error-handlers</module>
+        <module>webapps-commons-error-handlers-jersey</module>
     </modules>
+
 </project>

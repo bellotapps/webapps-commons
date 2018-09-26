@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.bellotapps.webapps</groupId>
+        <artifactId>webapps-commons-modules</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+
+    <artifactId>webapps-commons-error-handlers</artifactId>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Web constants (in order to get http status code definitions) -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>webapps-commons-web-constants</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- Exceptions definitions -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>webapps-commons-exceptions</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- Web Exceptions definitions -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>webapps-commons-web-exceptions</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- Error DTOs definitions -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>webapps-commons-error-dtos</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- Spring Security Exceptions -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+
+        <!-- Spring TX (transactions) Exceptions -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+
+        <!-- Hibernate Exceptions -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+
+        <!-- Error handler -->
+        <dependency>
+            <groupId>com.bellotapps.utils</groupId>
+            <artifactId>error-handler</artifactId>
+        </dependency>
+    </dependencies>
+</project>

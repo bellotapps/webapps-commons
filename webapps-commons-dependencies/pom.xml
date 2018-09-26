@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,12 +18,12 @@
         <!-- Build -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependencies versions -->
-        <org.springframework.boot.version>2.0.4.RELEASE</org.springframework.boot.version>
+        <org.springframework.boot.version>2.0.5.RELEASE</org.springframework.boot.version>
+        <com.bellotapps.utils.error-handler.version>2.1.0-RELEASE</com.bellotapps.utils.error-handler.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Spring boot dependencies -->
             <!-- Spring Boot dependency management import -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -33,7 +32,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- Error Handler -->
+            <dependency>
+                <groupId>com.bellotapps.utils</groupId>
+                <artifactId>error-handler</artifactId>
+                <version>${com.bellotapps.utils.error-handler.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>
