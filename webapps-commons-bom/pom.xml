@@ -67,6 +67,11 @@
                 <artifactId>webapps-commons-repositories</artifactId>
                 <version>${modules.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>webapps-commons-web-dtos</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

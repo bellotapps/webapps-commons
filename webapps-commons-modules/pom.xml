@@ -37,6 +37,7 @@
         <module>webapps-commons-error-handlers-jersey</module>
         <module>webapps-commons-repositories</module>
         <module>webapps-commons-persistence-helpers</module>
+        <module>webapps-commons-web-dtos</module>
     </modules>
 
 </project>
