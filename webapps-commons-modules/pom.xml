@@ -39,6 +39,7 @@
         <module>webapps-commons-persistence-helpers</module>
         <module>webapps-commons-web-dtos</module>
         <module>webapps-commons-authorization-grants</module>
+        <module>webapps-commons-authentication-interfaces</module>
     </modules>
 
 </project>
