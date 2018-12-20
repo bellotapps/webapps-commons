@@ -40,6 +40,7 @@
         <module>webapps-commons-web-dtos</module>
         <module>webapps-commons-authorization-grants</module>
         <module>webapps-commons-authentication-interfaces</module>
+        <module>webapps-commons-authentication</module>
     </modules>
 
 </project>
