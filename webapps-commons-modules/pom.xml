@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>webapps-commons</artifactId>
         <groupId>com.bellotapps.webapps</groupId>
+        <artifactId>webapps-commons</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -38,6 +38,7 @@
         <module>webapps-commons-repositories</module>
         <module>webapps-commons-persistence-helpers</module>
         <module>webapps-commons-web-dtos</module>
+        <module>webapps-commons-authorization-grants</module>
     </modules>
 
 </project>
