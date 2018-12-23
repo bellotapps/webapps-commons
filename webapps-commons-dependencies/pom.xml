@@ -19,6 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependencies versions -->
         <org.springframework.boot.version>2.0.5.RELEASE</org.springframework.boot.version>
+        <io.jsonwebtoken.jjwt.version>0.10.5</io.jsonwebtoken.jjwt.version>
         <com.bellotapps.utils.error-handler.version>2.1.0-RELEASE</com.bellotapps.utils.error-handler.version>
     </properties>
 
@@ -31,6 +32,26 @@
                 <version>${org.springframework.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+
+            <!-- Json Web Tokens -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${io.jsonwebtoken.jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${io.jsonwebtoken.jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${io.jsonwebtoken.jjwt.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <!-- Error Handler -->

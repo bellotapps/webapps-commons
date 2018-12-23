@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.bellotapps.webapps</groupId>
+        <artifactId>webapps-commons-modules</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>webapps-commons-web-authentication</artifactId>
+    <name>webapps-commons-web-authentication</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Authentication interfaces -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>webapps-commons-authentication-interfaces</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- Data transfer -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>webapps-commons-data-transfer</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- Spring Boot Autoconfigure to get conditional beans annotations -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!-- Spring Security Web and Configuration -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+
+        <!-- Servlet API, which must be provided -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ErrorHandler used to map authentication exceptions into a response -->
+        <dependency>
+            <groupId>com.bellotapps.utils</groupId>
+            <artifactId>error-handler</artifactId>
+        </dependency>
+    </dependencies>
+</project>
