@@ -42,6 +42,7 @@
         <module>webapps-commons-authorization-grants</module>
         <module>webapps-commons-authentication-interfaces</module>
         <module>webapps-commons-authentication</module>
+        <module>webapps-commons-web-authentication</module>
     </modules>
 
 </project>
