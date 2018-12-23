@@ -4,5 +4,5 @@ cache:
     - $HOME/.m2
 
 jdk:
-  - oraclejdk10
   - openjdk10
+  - openjdk11
