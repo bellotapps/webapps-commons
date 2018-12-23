@@ -27,7 +27,7 @@ public class RoleGrantsProvider implements GrantsProvider {
     public Optional<Grant> fromString(final String string) {
         try {
             return Optional.of(RoleGrant.fromString(string)); // The RoleGrant#fromString method should not return null.
-        } catch (IllegalArgumentException ignored) {
+        } catch (final IllegalArgumentException ignored) {
             return Optional.empty();
         }
     }
