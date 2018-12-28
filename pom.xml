@@ -24,7 +24,7 @@
 
         <!-- Versions -->
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <versions-maven-plugin.version>2.5</versions-maven-plugin.version>
+        <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
     </properties>

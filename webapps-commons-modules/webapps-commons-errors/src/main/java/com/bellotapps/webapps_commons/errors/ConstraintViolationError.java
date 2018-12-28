@@ -17,6 +17,7 @@
 package com.bellotapps.webapps_commons.errors;
 
 import org.springframework.util.Assert;
+import org.springframework.util.ClassUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Payload;
@@ -85,7 +86,7 @@ public final class ConstraintViolationError extends EntityError {
         final var errorCause = violation.getConstraintDescriptor()
                 .getPayload()
                 .stream()
-                .filter(ErrorCausePayload.class::isAssignableFrom) // Only subclasses of ErrorCausePayload
+                .filter(klass -> ClassUtils.isAssignable(ErrorCausePayload.class, klass)) // Only ErrorCausePayloads
                 .findFirst() // Just the first one (more than one: unexpected behaviour, as only the first one is used).
                 .map(ErrorCause::getByPayloadClass) // Map to an ErrorCause value
                 .orElse(ErrorCause.UNKNOWN); // Unknown error cause if no payload of type ErrorCausePayload.

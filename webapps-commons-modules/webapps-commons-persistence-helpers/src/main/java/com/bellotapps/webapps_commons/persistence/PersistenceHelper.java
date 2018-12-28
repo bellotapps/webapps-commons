@@ -24,7 +24,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.util.Assert;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
@@ -64,8 +63,7 @@ public class PersistenceHelper {
         Assert.notNull(pattern, "The pattern must not be null");
         Assert.notNull(matchMode, "The MatchMode must not be null");
 
-        final Path<String> attributePath = root.get(root.getModel()
-                .getDeclaredSingularAttribute(attributeName, String.class));
+        final var attributePath = root.get(root.getModel().getDeclaredSingularAttribute(attributeName, String.class));
         return caseSensitive ?
                 cb.like(attributePath, matchMode.toMatchString(pattern)) :
                 cb.like(cb.lower(attributePath), matchMode.toMatchString(pattern.toLowerCase()));

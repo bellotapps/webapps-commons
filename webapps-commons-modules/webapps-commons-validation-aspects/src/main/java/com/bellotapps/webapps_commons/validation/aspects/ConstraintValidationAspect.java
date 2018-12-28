@@ -19,6 +19,7 @@ package com.bellotapps.webapps_commons.validation.aspects;
 import com.bellotapps.webapps_commons.exceptions.CustomConstraintViolationException;
 import com.bellotapps.webapps_commons.validation.annotations.ValidateConstraintsAfter;
 import com.bellotapps.webapps_commons.validation.annotations.ValidateConstraintsBefore;
+import org.aspectj.lang.Aspects;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,7 +33,7 @@ import javax.validation.Validator;
 
 /**
  * An aspect that adds auto-constraints-validation to objects whose methods or constructors are annotated with
- * {@link ValidateConstraintsBefore} or {@link ValidateConstraintsAfter} annotation.
+ * {@link ValidateConstraintsBefore} or {@link ValidateConstraintsAfter} annotations.
  */
 @Aspect
 public class ConstraintValidationAspect implements InitializingBean {
@@ -40,7 +41,7 @@ public class ConstraintValidationAspect implements InitializingBean {
     /**
      * A {@link Validator} instance used to validate the object.
      * Note: The {@link Autowired} annotation is set here because this bean is created
-     * using the {@link org.aspectj.lang.Aspects#aspectOf(Class)}, which uses the default constructor.
+     * using the {@link Aspects#aspectOf(Class)}, which uses the default constructor.
      */
     @Autowired
     private final Validator validator;
