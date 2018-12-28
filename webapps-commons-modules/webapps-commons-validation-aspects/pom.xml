@@ -17,7 +17,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.aspectj.aspectjrt.version>1.9.1</org.aspectj.aspectjrt.version>
+        <org.aspectj.aspectjrt.version>1.9.2</org.aspectj.aspectjrt.version>
+        <aspectj-maven-plugin.version>1.11</aspectj-maven-plugin.version>
+        <aspectj-java-version>11</aspectj-java-version>
     </properties>
 
     <dependencies>
@@ -57,11 +59,11 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.11</version>
+                <version>${aspectj-maven-plugin.version}</version>
                 <configuration>
-                    <complianceLevel>10</complianceLevel>
-                    <source>10</source>
-                    <target>10</target>
+                    <complianceLevel>${aspectj-java-version}</complianceLevel>
+                    <source>${aspectj-java-version}</source>
+                    <target>${aspectj-java-version}</target>
                     <verbose>false</verbose>
                     <Xlint>ignore</Xlint>
                     <includes>
