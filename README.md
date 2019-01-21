@@ -11,15 +11,36 @@ This project contains a bunch of libraries defining and implementing stuff that 
 
 ### Get it!
 
-By the time, the only way to obtain these libraries is by downloading the source code and manually build it.
+#### Maven Central
+
+All the modules are hosted in Maven Central, and can be accessed by adding the corresponding dependency in your ```pom.xml``` file.
+
+For example:
+
+```
+<dependency>
+    <groupId>com.bellotapps.webapps</groupId>
+    <artifactId>webapps-commons-authentication</artifactId>
+    <version>${webapps-commons.version}</version>
+</dependency>
+```
+
 
 #### Build from source
-**Maven is required for this**
+
+You can also build your own versions of the libraries.
+**Maven is required for this**.
 
 ```
 $ git clone https://github.com/bellotapps/webapps-commons.git
 $ cd webapps-commons
 $ mvn clean install
+```
+
+**Note:** There are several profiles defined in the root's ```pom.xml``` file. The ```local-deploy``` profile will also install the sources and javadoc jars. You can use it like this:
+
+```
+$ mvn clean install -P local-deploy
 ```
 
 **Note:** You can also download the source code from [https://github.com/bellotapps/webapps-commons/archive/master.zip](https://github.com/bellotapps/webapps-commons/archive/master.zip)
