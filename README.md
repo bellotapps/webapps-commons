@@ -17,7 +17,7 @@ All the modules are hosted in Maven Central, and can be accessed by adding the c
 
 For example:
 
-```
+```xml
 <dependency>
     <groupId>com.bellotapps.webapps</groupId>
     <artifactId>webapps-commons-authentication</artifactId>
