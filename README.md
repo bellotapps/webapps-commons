@@ -2,7 +2,7 @@
 
 Project containing a bunch of commons stuff that can be used for building web applications.
 
-**Java 10 is required for this library to be used**
+**Java 11 is required for this library to be used**
 
 ## Description
 This project contains a bunch of libraries defining and implementing stuff that can be used for building web applications.
