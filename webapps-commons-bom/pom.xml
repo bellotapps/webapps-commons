@@ -101,6 +101,16 @@
                 <artifactId>webapps-commons-authorization-grants</artifactId>
                 <version>${modules.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>webapps-commons-web-error-handling</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>webapps-commons-web-jersey-app</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

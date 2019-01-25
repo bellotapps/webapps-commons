@@ -43,6 +43,8 @@
         <module>webapps-commons-authentication-interfaces</module>
         <module>webapps-commons-authentication</module>
         <module>webapps-commons-web-authentication</module>
+        <module>webapps-commons-web-error-handling</module>
+        <module>webapps-commons-web-jersey-app</module>
     </modules>
 
 </project>
