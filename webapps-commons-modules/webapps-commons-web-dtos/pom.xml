@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.bellotapps.webapps</groupId>
         <artifactId>webapps-commons-modules</artifactId>
-        <version>0.0.1-RELEASE</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>webapps-commons-web-dtos</artifactId>
