@@ -45,8 +45,8 @@
 
         <!-- Jackson JSON Provider for JAX-RS -->
         <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
         </dependency>
 
         <!-- Error handler, in order to access the error handling system -->
