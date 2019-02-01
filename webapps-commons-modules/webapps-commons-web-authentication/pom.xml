@@ -12,7 +12,8 @@
     </parent>
 
     <artifactId>webapps-commons-web-authentication</artifactId>
-    <name>webapps-commons-web-authentication</name>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
