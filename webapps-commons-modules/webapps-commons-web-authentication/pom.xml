@@ -24,14 +24,14 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-authentication-interfaces</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Data transfer -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-data-transfer</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Spring Boot Autoconfigure to get conditional beans annotations -->

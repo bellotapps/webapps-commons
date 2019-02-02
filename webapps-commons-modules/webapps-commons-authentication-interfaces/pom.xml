@@ -24,14 +24,14 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-exceptions</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Authorization Grants -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-authorization-grants</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
     </dependencies>
 </project>

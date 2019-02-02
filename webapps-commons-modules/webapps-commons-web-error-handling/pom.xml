@@ -20,10 +20,11 @@
     </properties>
 
     <dependencies>
+        <!-- Data transfer -->
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-data-transfer</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Spring Web, to get access to the GenericFilterBean class -->

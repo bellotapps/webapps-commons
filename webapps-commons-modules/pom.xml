@@ -15,12 +15,20 @@
     <name>${project.groupId}:${project.artifactId}</name>
     <packaging>pom</packaging>
 
+    <properties>
+        <!-- Build -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Own Libraries -->
+        <own-libraries.version>${revision}</own-libraries.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
                 <artifactId>webapps-commons-dependencies</artifactId>
-                <version>${project.parent.version}</version>
+                <version>${own-libraries.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

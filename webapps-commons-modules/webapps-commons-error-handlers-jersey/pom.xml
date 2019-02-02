@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-error-handlers</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Jersey Exceptions (including Jax-RS API exceptions) -->

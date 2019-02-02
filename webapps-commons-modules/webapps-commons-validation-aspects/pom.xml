@@ -27,7 +27,7 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-exceptions</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Spring context for configuration classes -->

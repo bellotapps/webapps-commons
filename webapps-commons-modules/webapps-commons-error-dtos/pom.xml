@@ -24,7 +24,7 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-errors</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Jackson databind, which provides databind annotations for dtos -->

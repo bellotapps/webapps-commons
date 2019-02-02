@@ -24,28 +24,28 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-web-constants</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Exceptions definitions -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-exceptions</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Web Exceptions definitions -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-web-exceptions</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Error DTOs definitions -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>webapps-commons-error-dtos</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${own-libraries.version}</version>
         </dependency>
 
         <!-- Spring Security Exceptions -->

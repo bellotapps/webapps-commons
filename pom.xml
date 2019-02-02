@@ -26,14 +26,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <revision>0.1.0-SNAPSHOT</revision>
 
-        <!-- Versions -->
+        <!-- Plugins Versions -->
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
+
+        <!-- Spring Boot -->
+        <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
     </properties>
 
     <profiles>
