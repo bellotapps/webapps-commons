@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.bellotapps.webapps</groupId>
         <artifactId>webapps-commons-modules</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>webapps-commons-error-handlers-jersey</artifactId>
