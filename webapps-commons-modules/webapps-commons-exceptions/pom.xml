@@ -22,9 +22,9 @@
     <dependencies>
         <!-- Errors definitions -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-errors</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Hibernate implementation of the javax.validation API -->

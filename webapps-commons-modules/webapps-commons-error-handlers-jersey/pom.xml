@@ -21,11 +21,11 @@
 
     <dependencies>
 
-        <!-- This is an extension of the com.bellotapps.webapps:webapps-commons-error-handlers project -->
+        <!-- This is an extension of the webapps-commons-error-handlers project -->
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-error-handlers</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Jersey Exceptions (including Jax-RS API exceptions) -->

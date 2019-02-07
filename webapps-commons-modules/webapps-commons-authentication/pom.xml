@@ -22,9 +22,9 @@
     <dependencies>
         <!-- Authentication interfaces -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-authentication-interfaces</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Spring Boot Autoconfigure -->

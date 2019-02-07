@@ -17,107 +17,125 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <modules.version>${revision}</modules.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-errors</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-exceptions</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-validation-aspects</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-error-dtos</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-web-constants</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-web-exceptions</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-error-handlers</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-error-handlers-jersey</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-repositories</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-persistence-helpers</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-web-dtos</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-data-transfer</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-data-transfer-jersey</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-authentication</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-authentication-interfaces</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-web-authentication</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-authorization-grants</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-web-error-handling</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-web-jersey-app</artifactId>
-                <version>${modules.version}</version>
+                <version>${revision}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- Configure flatten plugin for a BOM project -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <configuration>
+                            <pomElements>
+                                <dependencyManagement>keep</dependencyManagement>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

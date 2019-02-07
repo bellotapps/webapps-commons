@@ -22,22 +22,9 @@
     </modules>
 
     <properties>
-        <!-- Build -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
         <revision>0.1.0-SNAPSHOT</revision>
-
-        <!-- Plugins Versions -->
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-
-        <!-- Spring Boot -->
-        <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.1.RELEASE</spring-boot.version> <!-- Set here as it is needed almost everywhere -->
     </properties>
 
     <profiles>
@@ -90,6 +77,25 @@
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
                     </plugin>
+
+                    <!-- Flatten plugin configuration for nexus deploy (add needed things) -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <configuration>
+                                    <pomElements>
+                                        <description>keep</description>
+                                        <url>keep</url>
+                                        <scm>keep</scm>
+                                        <developers>keep</developers>
+                                    </pomElements>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
 
@@ -107,36 +113,32 @@
 
         <profile>
             <id>travis-ci</id>
+            <build>
+                <plugins>
+                    <!-- For the Travis CI profile, resolve using the CI Friendly flatten mode -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <configuration>
+                                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
     <build>
-
         <plugins>
+            <!-- Always flatten with default configuration (set in default dependencyManagement) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
 
@@ -146,25 +148,23 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
+                    <version>3.8.0</version>
                     <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
+                        <source>11</source>
+                        <target>11</target>
                     </configuration>
                 </plugin>
-
                 <!-- Maven versions plugin -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-                    <version>${versions-maven-plugin.version}</version>
+                    <version>2.7</version>
                 </plugin>
-
                 <!-- Sources -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>${maven-source-plugin.version}</version>
+                    <version>3.0.1</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -174,16 +174,14 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <!-- Javadocs -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${maven-javadoc-plugin.version}</version>
+                    <version>3.0.1</version>
                     <configuration>
                         <detectOfflineLinks>false</detectOfflineLinks>
                         <quiet>true</quiet>
-
                         <tags>
                             <tag>
                                 <name>implNote</name>
@@ -212,12 +210,11 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <!-- GPG Signature -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>${maven-gpg-plugin.version}</version>
+                    <version>1.6</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -228,13 +225,11 @@
                         </execution>
                     </executions>
                 </plugin>
-
-
                 <!-- Distribution -->
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>${nexus-staging-maven-plugin.version}</version>
+                    <version>1.6.8</version>
                     <extensions>true</extensions>
                     <configuration>
                         <serverId>ossrh</serverId>
@@ -242,10 +237,45 @@
                         <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     </configuration>
                 </plugin>
+                <!-- Flatten plugin -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>1.1.0</version>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}</outputDirectory>
+                    </configuration>
+                    <executions>
+                        <!-- Default execution configuration for the flatten goal (this must happen always) -->
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                            <configuration>
+                                <updatePomFile>true</updatePomFile>
+                                <pomElements>
+                                    <parent>expand</parent>
+                                    <name>keep</name>
+                                    <properties>keep</properties>
+                                    <modules>keep</modules>
+                                </pomElements>
+                            </configuration>
+                        </execution>
+                        <!-- Default execution configuration for the clean goal -->
+                        <execution>
+                            <id>flatten-clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
 
     <licenses>
         <license>
@@ -253,7 +283,6 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-
     <developers>
         <developer>
             <name>Juan Marcos Bellini</name>
@@ -262,11 +291,9 @@
             <organizationUrl>https://bellotapps.com</organizationUrl>
         </developer>
     </developers>
-
     <scm>
         <connection>scm:git:git://github.com/bellotapps/webapps-commons.git</connection>
         <developerConnection>scm:git:ssh://github.com:bellotapps/webapps-commons.git</developerConnection>
         <url>http://github.com/bellotapps/webapps-commons/tree/master</url>
     </scm>
-
 </project>

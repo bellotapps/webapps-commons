@@ -18,17 +18,14 @@
     <properties>
         <!-- Build -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Own Libraries -->
-        <own-libraries.version>${revision}</own-libraries.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>${project.parent.groupId}</groupId>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-dependencies</artifactId>
-                <version>${own-libraries.version}</version>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -56,5 +53,27 @@
         <module>webapps-commons-web-error-handling</module>
         <module>webapps-commons-web-jersey-app</module>
     </modules>
+
+
+    <!-- Configure flatten plugin to keep the dependencyManagement of this project -->
+    <!-- Note: The dependencies managed by this project are used by the libraries code -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <configuration>
+                            <pomElements>
+                                <dependencyManagement>keep</dependencyManagement>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

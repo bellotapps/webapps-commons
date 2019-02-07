@@ -27,9 +27,6 @@
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
-
-        <!-- Own Libraries -->
-        <own-libraries.version>${revision}</own-libraries.version>
     </properties>
 
     <dependencyManagement>
@@ -39,7 +36,7 @@
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-bom</artifactId>
-                <version>${own-libraries.version}</version>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -48,7 +45,7 @@
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-dependencies</artifactId>
-                <version>${own-libraries.version}</version>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -56,6 +53,27 @@
     </dependencyManagement>
 
     <build>
+        <!-- The flattened plugin must not be inherited by children of this project -->
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <configuration>
+                            <pomElements>
+                                <pluginManagement>keep</pluginManagement>
+                                <dependencyManagement>keep</dependencyManagement>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <!-- Plugin Management that must be included in the final POM to be included in children projects -->
         <pluginManagement>
             <plugins>
                 <!-- Spring Boot Plugin -->
@@ -71,8 +89,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-
                 <!-- Maven compiler plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

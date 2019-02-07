@@ -23,13 +23,13 @@
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-data-transfer</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-web-exceptions</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Jersey Container Servlet Core, which provides definitions to create providers -->

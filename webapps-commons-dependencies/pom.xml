@@ -18,8 +18,7 @@
     <properties>
         <!-- Build -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Dependencies versions -->
-        <org.springframework.boot.version>${spring-boot.version}</org.springframework.boot.version>
+        <!-- Dependencies versions (others than spring boot) -->
         <io.jsonwebtoken.jjwt.version>0.10.5</io.jsonwebtoken.jjwt.version>
         <com.bellotapps.utils.error-handler.version>2.1.0-RELEASE</com.bellotapps.utils.error-handler.version>
     </properties>
@@ -30,7 +29,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${org.springframework.boot.version}</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -62,4 +61,24 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- Configure flatten plugin for a BOM project -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <configuration>
+                            <pomElements>
+                                <dependencyManagement>keep</dependencyManagement>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

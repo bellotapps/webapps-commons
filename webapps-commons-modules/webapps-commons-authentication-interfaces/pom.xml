@@ -22,16 +22,16 @@
     <dependencies>
         <!-- Exceptions definitions -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-exceptions</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Authorization Grants -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-authorization-grants</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

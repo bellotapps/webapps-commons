@@ -22,9 +22,9 @@
     <dependencies>
         <!-- Errors definitions -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-errors</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Jackson databind, which provides databind annotations for dtos -->

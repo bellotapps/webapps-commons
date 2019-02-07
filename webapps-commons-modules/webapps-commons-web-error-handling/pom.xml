@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-data-transfer</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Spring Web, to get access to the GenericFilterBean class -->

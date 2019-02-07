@@ -2,6 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -22,30 +23,30 @@
     <dependencies>
         <!-- Web constants (in order to get http status code definitions) -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-web-constants</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Exceptions definitions -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-exceptions</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Web Exceptions definitions -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-web-exceptions</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Error DTOs definitions -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
+            <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-error-dtos</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Spring Security Exceptions -->
