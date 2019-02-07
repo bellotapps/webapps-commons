@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.bellotapps.webapps</groupId>
         <artifactId>webapps-commons-modules</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>webapps-commons-error-handlers-jersey</artifactId>
@@ -21,11 +21,11 @@
 
     <dependencies>
 
-        <!-- This is an extension of the com.bellotapps.webapps:webapps-commons-error-handlers project -->
+        <!-- This is an extension of the webapps-commons-error-handlers project -->
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-error-handlers</artifactId>
-            <version>${own-libraries.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Jersey Exceptions (including Jax-RS API exceptions) -->
