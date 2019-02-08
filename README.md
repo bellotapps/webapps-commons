@@ -4,6 +4,7 @@ Project containing a bunch of commons stuff that can be used for building web ap
 
 **Java 11 is required for this library to be used**
 
+
 ## Description
 This project contains a bunch of libraries defining and implementing stuff that can be used for building web applications.
 
@@ -95,6 +96,26 @@ To use this module, include the following in your ```pom.xml```.
 </dependencyManagement>
 ```
 
+After adding the ```webapps-commons-dependencies``` artifact as an imported managed dependency, you can start using the different dependencies that are used in these libraries.
+
+### Parent project
+
+If you want to make it simpler, you can make your project extend the ```webapps-commmons-parent-project``` Maven Project. If you do so, you woon't have to add the ```webapps-commons-bom``` and the ```webapps-commons-dependencies``` modules as imported managed dependencies, as they are already imported in the parent project.
+
+Another feature that this parent project includes is the management of several plugins that might help your own build, including the ```spring-boot-maven-plugin```, using the same version as the spring-boot artifacts.
+
+To use the parent project, modify your ```pom.xml``` file to include the following:
+
+```xml
+<parent>
+    <groupId>com.bellotapps.webapps</groupId>
+    <artifactId>webapps-commons-parent-project</artifactId>
+    <version>${webapps-commons.version}</version>
+</parent>
+```
+
+**Note:** A placeholder is used as ```version``` in the previous example to avoid changing it each time a new version is release. Replace the ```${webapps-commons.version}``` placeholder with the actual version of the ```webapps-commons``` project.
+
 
 ## Development
 
@@ -114,6 +135,9 @@ This instructions will set up the development environment in your local machine.
     ```
 
 2. Install Maven
+
+    **Note: Maven 3.5+ is required!**
+
     #### Mac OS X
 	```
 	$ brew install maven
@@ -140,6 +164,7 @@ This instructions will set up the development environment in your local machine.
     ```
     $ mvn clean package
     ```
+
 
 ## License
 
