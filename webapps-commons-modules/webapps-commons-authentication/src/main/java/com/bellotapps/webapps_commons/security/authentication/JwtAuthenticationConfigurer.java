@@ -21,16 +21,16 @@ import com.bellotapps.webapps_commons.security.authorization.RoleGrantsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.Base64Utils;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
@@ -40,12 +40,23 @@ import java.security.spec.X509EncodedKeySpec;
  * and the "com.adtomiclabs.commons.authentication.jwt.key.public" property must be set.
  */
 @Configuration
+@EnableConfigurationProperties(AuthenticationProperties.class)
 public class JwtAuthenticationConfigurer {
 
     /**
      * The {@link Logger} object.
      */
     private final static Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationConfigurer.class);
+
+    /**
+     * {@link AuthenticationProperties} to be used when creating the authentication module beans.
+     */
+    private final AuthenticationProperties authenticationProperties;
+
+    @Autowired
+    public JwtAuthenticationConfigurer(final AuthenticationProperties authenticationProperties) {
+        this.authenticationProperties = authenticationProperties;
+    }
 
     @Bean
     @ConditionalOnMissingBean
@@ -56,14 +67,29 @@ public class JwtAuthenticationConfigurer {
     @Bean
     @Autowired
     @ConditionalOnMissingBean
+    public AuthenticationTokenEncoder authenticationTokenEncoder(final KeyFactory keyFactory)
+            throws InvalidKeySpecException {
+        final var encodedPrivateKeyString = authenticationProperties.getJwt().getPrivateKey();
+        final var privateKeyString = Base64Utils.decodeFromString(encodedPrivateKeyString);
+        final var privateKeySpec = new PKCS8EncodedKeySpec(privateKeyString);
+        final var privateKey = keyFactory.generatePrivate(privateKeySpec);
+        final var duration = authenticationProperties.getJwt().getDuration();
+        return new JwtAuthenticationTokenEncoder(privateKey, duration);
+    }
+
+    @Bean
+    @Autowired
+    @ConditionalOnMissingBean
     public AuthenticationTokenDecoder authenticationTokenDecoder(
             final KeyFactory keyFactory,
-            final GrantsProvider grantsProvider,
-            @Value("${com.adtomiclabs.commons.authentication.jwt.key.public}") final String publicKeyString)
+            final GrantsProvider grantsProvider)
             throws InvalidKeySpecException {
-        final X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64Utils.decodeFromString(publicKeyString));
-        final PublicKey publicKey = keyFactory.generatePublic(keySpecX509);
-        return new JwtAuthenticationTokenDecoder(grantsProvider, publicKey);
+
+        final var encodedPublicKeyString = authenticationProperties.getJwt().getPublicKey();
+        final var publicKeyString = Base64Utils.decodeFromString(encodedPublicKeyString);
+        final var publicKeySpec = new X509EncodedKeySpec(publicKeyString);
+        final var publicKey = keyFactory.generatePublic(publicKeySpec);
+        return new JwtAuthenticationTokenDecoder(publicKey, grantsProvider);
     }
 
     @Bean

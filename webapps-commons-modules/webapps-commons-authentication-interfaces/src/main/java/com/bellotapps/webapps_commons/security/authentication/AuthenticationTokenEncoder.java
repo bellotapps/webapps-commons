@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 BellotApps
+ * Copyright 2019 BellotApps
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,15 @@
 package com.bellotapps.webapps_commons.security.authentication;
 
 /**
- * Defines behavior for an object that can decode a token from a {@link String}.
+ * Defines behavior for an object that can encode a token into a {@link String}.
  */
-@FunctionalInterface
-public interface AuthenticationTokenDecoder {
+public interface AuthenticationTokenEncoder {
 
     /**
-     * Retrieves {@link TokenData} from a {@link String} representation of it.
+     * Transforms a {@link TokenData} into a {@link String} representation of it.
      *
-     * @param encodedToken The encoded token.
-     * @return {@link TokenData} taken from the given raw token.
-     * @throws TokenException In case the token is not valid.
+     * @param token The token to be encoded.
+     * @return An encoded representation of a token.
      */
-    TokenData decode(final String encodedToken) throws TokenException;
+    String encode(final TokenData token);
 }

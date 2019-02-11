@@ -52,6 +52,7 @@
         <module>webapps-commons-web-authentication</module>
         <module>webapps-commons-web-error-handling</module>
         <module>webapps-commons-web-jersey-app</module>
+        <module>webapps-commons-core</module>
     </modules>
 
 

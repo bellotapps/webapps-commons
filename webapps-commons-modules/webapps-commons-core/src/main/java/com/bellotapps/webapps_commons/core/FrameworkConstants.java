@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 BellotApps
+ * Copyright 2019 BellotApps
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package com.bellotapps.webapps_commons.security.authentication;
+package com.bellotapps.webapps_commons.core;
 
 /**
- * Defines behavior for an object that can decode a token from a {@link String}.
+ * Class containing several constants to be used across the framework.
  */
-@FunctionalInterface
-public interface AuthenticationTokenDecoder {
+public class FrameworkConstants {
 
     /**
-     * Retrieves {@link TokenData} from a {@link String} representation of it.
-     *
-     * @param encodedToken The encoded token.
-     * @return {@link TokenData} taken from the given raw token.
-     * @throws TokenException In case the token is not valid.
+     * Main prefix for all the application properties defined in the framework.
      */
-    TokenData decode(final String encodedToken) throws TokenException;
+    public static final String MAIN_PROPERTIES_PREFIX = "com.bellotapps.webapps-commons";
 }

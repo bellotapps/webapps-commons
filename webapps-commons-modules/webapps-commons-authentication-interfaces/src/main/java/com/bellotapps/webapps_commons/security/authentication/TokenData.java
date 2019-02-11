@@ -39,17 +39,17 @@ public final class TokenData {
     /**
      * The grants given to the token.
      */
-    private final List<Grant> roles;
+    private final List<Grant> grants;
 
     /**
      * @param id       The token's id.
      * @param username The token's owner username.
-     * @param roles    The grants given to the token.
+     * @param grants   The grants given to the token.
      */
-    public TokenData(final long id, final String username, final List<Grant> roles) {
+    public TokenData(final long id, final String username, final List<Grant> grants) {
         this.id = id;
         this.username = username;
-        this.roles = Collections.unmodifiableList(roles); // This list cannot be changed.
+        this.grants = Collections.unmodifiableList(grants); // This list cannot be changed.
     }
 
     /**
@@ -70,6 +70,6 @@ public final class TokenData {
      * @return The grants given to the token.
      */
     public List<Grant> getGrants() {
-        return roles;
+        return grants;
     }
 }

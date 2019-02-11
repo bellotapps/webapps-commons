@@ -37,14 +37,14 @@ import static com.bellotapps.webapps_commons.security.authentication.JwtAuthenti
 public class JwtAuthenticationTokenDecoder implements AuthenticationTokenDecoder {
 
     /**
-     * A {@link JwtHandlerAdapter} used to handle the decoding process.
-     */
-    private final JwtHandlerAdapter<Jws<Claims>> jwtHandlerAdapter;
-
-    /**
      * The {@link PublicKey} used to verify the jwt token signature.
      */
     private final PublicKey publicKey;
+
+    /**
+     * A {@link JwtHandlerAdapter} used to handle the decoding process.
+     */
+    private final JwtHandlerAdapter<Jws<Claims>> jwtHandlerAdapter;
 
 
     /**
@@ -53,9 +53,9 @@ public class JwtAuthenticationTokenDecoder implements AuthenticationTokenDecoder
      * @param grantsProvider A {@link GrantsProvider} used to translate {@link String}s into {@link Grant}s.
      * @param publicKey      The {@link PublicKey} used to verify the jwt token signature.
      */
-    public JwtAuthenticationTokenDecoder(final GrantsProvider grantsProvider, final PublicKey publicKey) {
-        this.jwtHandlerAdapter = new CustomJwtHandlerAdapter(grantsProvider);
+    public JwtAuthenticationTokenDecoder(final PublicKey publicKey, final GrantsProvider grantsProvider) {
         this.publicKey = publicKey;
+        this.jwtHandlerAdapter = new CustomJwtHandlerAdapter(grantsProvider);
     }
 
 
@@ -69,6 +69,7 @@ public class JwtAuthenticationTokenDecoder implements AuthenticationTokenDecoder
                     .setSigningKey(publicKey)
                     .parse(encodedToken, jwtHandlerAdapter)
                     .getBody();
+
 
             // Previous step validated the following values
             final var tokenId = Long.parseLong(claims.getId());
