@@ -23,7 +23,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>0.1.0-RELEASE</revision>
+        <revision>0.1.1-RELEASE</revision>
         <spring-boot.version>2.1.2.RELEASE</spring-boot.version> <!-- Set here as it is needed almost everywhere -->
     </properties>
 
