@@ -83,7 +83,7 @@ public class TokenAuthenticationConfigurer implements BeanFactoryAware, BeanClas
                 "Using mocked handler, " +
                 "which uses only the error handlers defined by the webapp-commons-error-handlers module.");
         return new ErrorHandlerFactory(classLoader, beanFactory)
-                .createErrorHandler("com.adtomiclabs.commons.commons.error_handlers");
+                .createErrorHandler("com.bellotapps.webapps_commons.error_handlers");
     }
 
     @Bean

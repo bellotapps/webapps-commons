@@ -16,7 +16,6 @@
 
 package com.bellotapps.webapps_commons.security.authentication;
 
-import com.bellotapps.webapps_commons.security.authorization.GrantsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,8 @@ import java.util.Optional;
 
 /**
  * Configuration class for the jwt authentication system.
- * In order to be used, an {@link AuthenticationTokenBlacklistedChecker} and a {@link GrantsProvider} beans
- * must be defined within the scope,
- * and the "com.adtomiclabs.commons.authentication.jwt.key.public" property must be set.
+ * In order to be used, the "com.bellotapps.webapps-commons.authentication.jwt.privateKey" and
+ * "com.bellotapps.webapps-commons.authentication.jwt.duration" properties must be set.
  *
  * @see EnableJwtIssuer
  */

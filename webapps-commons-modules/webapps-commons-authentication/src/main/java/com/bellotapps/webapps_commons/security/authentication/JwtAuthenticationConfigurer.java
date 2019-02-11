@@ -34,9 +34,10 @@ import java.util.Optional;
 
 /**
  * Configuration class for the jwt authentication system.
- * In order to be used, an {@link AuthenticationTokenBlacklistedChecker} and a {@link GrantsProvider} beans
- * must be defined within the scope,
- * and the "com.adtomiclabs.commons.authentication.jwt.key.public" property must be set.
+ * In order to be used, the "com.bellotapps.webapps-commons.authentication.jwt.publicKey" property must be set,
+ * and {@link AuthenticationTokenBlacklistedChecker} and {@link GrantsProvider} beans
+ * must exist in the application context
+ * (if they are not defined, the application will boot but won't work as expected).
  *
  * @see EnableJwtAuthentication
  */
