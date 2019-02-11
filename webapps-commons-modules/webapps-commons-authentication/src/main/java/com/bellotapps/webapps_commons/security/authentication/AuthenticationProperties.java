@@ -57,7 +57,7 @@ public class AuthenticationProperties {
     }
 
     /**
-     * Sub-Configuration properties for JWTs.
+     * Sub-Configuration properties for jwts.
      */
     public static final class JwtProperties {
 
@@ -70,7 +70,7 @@ public class AuthenticationProperties {
          */
         private String privateKey;
         /**
-         * The duration of the JWT.
+         * The duration of the jwt.
          */
         private Long duration;
 
@@ -95,7 +95,7 @@ public class AuthenticationProperties {
         /**
          * Getter for the duration.
          *
-         * @return The duration of the JWT.
+         * @return The duration of the jwt.
          */
         public Long getDuration() {
             return duration;
@@ -122,7 +122,7 @@ public class AuthenticationProperties {
         /**
          * Setter for the duration.
          *
-         * @param duration The duration of the JWT.
+         * @param duration The duration of the jwt.
          */
         public void setDuration(final Long duration) {
             this.duration = duration;

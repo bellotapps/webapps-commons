@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 BellotApps
+ * Copyright 2019 BellotApps
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,24 @@
 
 package com.bellotapps.webapps_commons.security.authentication;
 
-import com.bellotapps.webapps_commons.security.authorization.GrantsProvider;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * Enables the jwt authentication system, by importing needed beans into the scope.
- * In order to be used, the "com.bellotapps.webapps-commons.authentication.jwt.publicKey" property must be set,
- * and {@link AuthenticationTokenBlacklistedChecker} and {@link GrantsProvider} beans
- * must exist in the application context
- * (if they are not defined, the application will boot but won't work as expected).
+ * Enables the jwt issuer feature by importing needed beans into the scope.
+ * In order to be used, the "com.bellotapps.webapps-commons.authentication.jwt.privateKey" and
+ * "com.bellotapps.webapps-commons.authentication.jwt.duration" properties must be set.
  *
- * @see JwtAuthenticationConfigurer
+ * @see JwtIssuerConfigurer
  * @see AuthenticationProperties.JwtProperties
- * @see AuthenticationTokenDecoder
- * @see JwtAuthenticationTokenDecoder
- * @see AuthenticationTokenDataProvider
- * @see JwtAuthenticationTokenDataProvider
- * @see AuthenticationTokenBlacklistedChecker
- * @see GrantsProvider
+ * @see AuthenticationTokenEncoder
+ * @see JwtAuthenticationTokenEncoder
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-@Import(JwtAuthenticationConfigurer.class)
-public @interface EnableJwtAuthentication {
+@Import(JwtIssuerConfigurer.class)
+public @interface EnableJwtIssuer {
 }
