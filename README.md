@@ -114,7 +114,7 @@ To use the parent project, modify your ```pom.xml``` file to include the followi
 </parent>
 ```
 
-**Note:** A placeholder is used as ```version``` in the previous example to avoid changing it each time a new version is release. Replace the ```${webapps-commons.version}``` placeholder with the actual version of the ```webapps-commons``` project.
+**Note:** A placeholder is used as ```version``` in the previous example to avoid changing it each time a new version is released. Replace the ```${webapps-commons.version}``` placeholder with the actual version of the ```webapps-commons``` project.
 
 
 ## Development
