@@ -27,6 +27,8 @@
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
+        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>2.22.1</maven-failsafe-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -41,7 +43,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Import this libraries dependencies (even though its its parent) -->
+            <!-- Import this libraries dependencies -->
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-dependencies</artifactId>
@@ -76,7 +78,7 @@
         <!-- Plugin Management that must be included in the final POM to be included in children projects -->
         <pluginManagement>
             <plugins>
-                <!-- Spring Boot Plugin -->
+                <!-- Spring Boot -->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
@@ -89,7 +91,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- Maven compiler plugin -->
+                <!-- Compiler-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -99,7 +101,7 @@
                         <target>${maven.compiler.target}</target>
                     </configuration>
                 </plugin>
-                <!-- Maven versions plugin -->
+                <!-- Version manager -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
@@ -127,7 +129,6 @@
                     <configuration>
                         <detectOfflineLinks>false</detectOfflineLinks>
                         <quiet>true</quiet>
-
                         <tags>
                             <tag>
                                 <name>implNote</name>
@@ -155,6 +156,36 @@
                             </goals>
                         </execution>
                     </executions>
+
+                </plugin>
+                <!-- Surefire (unit tests) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <!-- Failsafe (integration tests) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>integration-test</id>
+                            <goals>
+                                <goal>integration-test</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>verify</id>
+                            <goals>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
