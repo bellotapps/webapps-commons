@@ -21,6 +21,7 @@
         <!-- Dependencies versions (others than spring boot) -->
         <io.jsonwebtoken.jjwt.version>0.10.5</io.jsonwebtoken.jjwt.version>
         <com.bellotapps.utils.error-handler.version>2.1.0-RELEASE</com.bellotapps.utils.error-handler.version>
+        <com.github.javafaker.javafaker.version>0.17.2</com.github.javafaker.javafaker.version>
     </properties>
 
     <dependencyManagement>
@@ -58,6 +59,13 @@
                 <groupId>com.bellotapps.utils</groupId>
                 <artifactId>error-handler</artifactId>
                 <version>${com.bellotapps.utils.error-handler.version}</version>
+            </dependency>
+
+            <!-- JavaFaker: Fake data -->
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>${com.github.javafaker.javafaker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
