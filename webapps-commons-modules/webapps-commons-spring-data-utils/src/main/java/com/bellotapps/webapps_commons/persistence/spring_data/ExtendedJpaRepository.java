@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 BellotApps
+ * Copyright 2019 BellotApps
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bellotapps.webapps_commons.repositories;
+package com.bellotapps.webapps_commons.persistence.spring_data;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;

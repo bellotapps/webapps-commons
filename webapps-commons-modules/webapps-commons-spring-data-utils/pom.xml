@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -11,7 +10,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>webapps-commons-persistence-helpers</artifactId>
+    <artifactId>webapps-commons-spring-data-utils</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
     <packaging>jar</packaging>
 
@@ -27,13 +26,22 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- Spring Data Commons -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
         </dependency>
+
+        <!-- Spring Data JPA stuff -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>
