@@ -42,6 +42,7 @@
         <module>webapps-commons-error-handlers-jersey</module>
         <module>webapps-commons-jpa-utils</module>
         <module>webapps-commons-spring-data-utils</module>
+        <module>webapps-commons-repository-utils</module>
         <module>webapps-commons-web-dtos</module>
         <module>webapps-commons-data-transfer</module>
         <module>webapps-commons-data-transfer-jersey</module>
