@@ -46,6 +46,7 @@
         <module>webapps-commons-web-dtos</module>
         <module>webapps-commons-data-transfer</module>
         <module>webapps-commons-data-transfer-jersey</module>
+        <module>webapps-commons-data-transfer-jersey-spring-data</module>
         <module>webapps-commons-authorization-grants</module>
         <module>webapps-commons-authentication-interfaces</module>
         <module>webapps-commons-authentication</module>

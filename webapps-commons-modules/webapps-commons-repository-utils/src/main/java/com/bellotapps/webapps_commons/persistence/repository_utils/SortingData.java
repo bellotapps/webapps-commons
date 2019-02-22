@@ -291,7 +291,7 @@ public class SortingData {
             /**
              * Default sort direction.
              */
-            private static final SortDirection DEFAULT_SORT_DIRECTION = SortDirection.ASC;
+            private static final SortDirection DEFAULT_SORT_DIRECTION = SortDirection.defaultDirection();
             /**
              * Default ignore case flag.
              */
@@ -459,6 +459,13 @@ public class SortingData {
          */
         public boolean isDescending() {
             return this.equals(DESC);
+        }
+
+        /**
+         * @return The default sort direction.
+         */
+        public static SortDirection defaultDirection() {
+            return ASC;
         }
 
         /**

@@ -32,15 +32,16 @@
             <version>${revision}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.bellotapps.webapps</groupId>
+            <artifactId>webapps-commons-repository-utils</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!-- Jersey Container Servlet Core, which provides definitions to create providers -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
-        </dependency>
-        <!-- Spring Data Commons, which provides the Pageable class -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
         </dependency>
     </dependencies>
 </project>
