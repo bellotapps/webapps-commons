@@ -21,6 +21,7 @@ import com.bellotapps.webapps_commons.data_transfer.jersey.annotations.Paginatio
 import com.bellotapps.webapps_commons.exceptions.IllegalParamValueException;
 import org.glassfish.jersey.internal.inject.InjectionManager;
 import org.glassfish.jersey.server.ContainerRequest;
+import org.glassfish.jersey.server.ParamException;
 import org.glassfish.jersey.server.model.Parameter;
 import org.glassfish.jersey.server.spi.internal.ValueParamProvider;
 import org.springframework.util.Assert;
@@ -420,9 +421,13 @@ public abstract class AbstractPagingValueParamProvider<C, S, P, D> implements Va
                                  @QueryParam(SORT_PARAM) final List<String> sortOrderDataList) {
             this.pageNumber = pageNumber;
             this.pageSize = pageSize;
-            this.sortOrderDataList = sortOrderDataList.stream()
-                    .map(SortOrderData::fromString)
-                    .collect(Collectors.toList());
+            try {
+                this.sortOrderDataList = sortOrderDataList.stream()
+                        .map(SortOrderData::fromString)
+                        .collect(Collectors.toList());
+            } catch (final Throwable e) {
+                throw new ParamException.QueryParamException(e, SORT_PARAM, "");
+            }
         }
 
         /**
@@ -524,7 +529,7 @@ public abstract class AbstractPagingValueParamProvider<C, S, P, D> implements Va
             final var splitted = stringValue.split(",", -1);
             // Then, check only one or two elements exists in the array.
             if (splitted.length == 0 || splitted.length > 2) {
-                throw new RuntimeException("invalid length");  // TODO: check if another exception is better
+                throw new IllegalArgumentException("Invalid sorting data format");
             }
 
             // Up to here we know that the format is correct.
