@@ -63,12 +63,17 @@
             </dependency>
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
-                <artifactId>webapps-commons-repositories</artifactId>
+                <artifactId>webapps-commons-jpa-utils</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
-                <artifactId>webapps-commons-persistence-helpers</artifactId>
+                <artifactId>webapps-commons-repository-utils</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bellotapps.webapps</groupId>
+                <artifactId>webapps-commons-spring-data-utils</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -84,6 +89,11 @@
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-data-transfer-jersey</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bellotapps.webapps</groupId>
+                <artifactId>webapps-commons-data-transfer-jersey-spring-data</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
