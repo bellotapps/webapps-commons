@@ -97,6 +97,6 @@ import java.util.Objects;
 
     @Override
     public String toString() {
-        return String.format("Paging and sorting request [number: %d, size %d, sort %s]", pageNumber, pageSize, sortBy);
+        return String.format("Paging and sorting request [number: %d, size: %d, sort: %s]", pageNumber, pageSize, sortBy);
     }
 }
