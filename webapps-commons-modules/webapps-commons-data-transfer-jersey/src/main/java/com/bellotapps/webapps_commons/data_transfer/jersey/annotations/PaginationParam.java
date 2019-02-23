@@ -19,7 +19,7 @@ package com.bellotapps.webapps_commons.data_transfer.jersey.annotations;
 import java.lang.annotation.*;
 
 /**
- * Indicates that a parameter contains data for creating a {@link org.springframework.data.domain.Pageable}.
+ * Indicates that a parameter contains data for creating an object with paging and sorting information.
  */
 @Target({ElementType.PARAMETER,})
 @Retention(RetentionPolicy.RUNTIME)
