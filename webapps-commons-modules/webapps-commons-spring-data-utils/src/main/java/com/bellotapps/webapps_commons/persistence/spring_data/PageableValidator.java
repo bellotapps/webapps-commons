@@ -22,10 +22,7 @@ import org.springframework.data.domain.Sort;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.Spliterator;
-import java.util.Spliterators;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Class in charge of validating if a {@link Pageable} can be used to query for entities of a given {@link Class}.
@@ -43,21 +40,19 @@ public class PageableValidator {
      */
     public static <T> void validatePageable(final Pageable pageable, final Class<T> klass)
             throws InvalidPropertiesException {
-        // First check if there are properties in the sort
-        final var spliterator = Spliterators.spliteratorUnknownSize(pageable.getSort().iterator(), Spliterator.ORDERED);
-        final var sortProperties = StreamSupport.stream(spliterator, false)
-                .map(Sort.Order::getProperty)
-                .collect(Collectors.toSet());
-        // If there are no properties, then return
-        if (sortProperties.isEmpty()) {
+        final var sort = pageable.getSort();
+        // // First check if the pageable is sorted.
+        if (sort.isUnsorted()) {
             return;
         }
+        // If reached here, then there is sorting information in the pageable. Proceed with validation
         // Get fields of the entity (to check if the Sort contains any property that the entity does not have).
         final var entityFields = Arrays.stream(klass.getDeclaredFields())
                 .map(Field::getName)
                 .collect(Collectors.toSet());
         // Check if there are properties in the Sort that the entity does not have.
-        final var invalidProperties = sortProperties.stream()
+        final var invalidProperties = sort.stream()
+                .map(Sort.Order::getProperty)
                 .filter(property -> !entityFields.contains(property))
                 .collect(Collectors.toList());
         // Throw an InvalidPropertiesException if the Sort contains properties that the entity does not have.
