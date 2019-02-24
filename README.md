@@ -59,7 +59,7 @@ This project includes a Bill Of Materials in order to make it easier to import t
 ```xml
 <dependencyManagement>
     <dependencies>
-        <-- ... -->
+        <!-- ... -->
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-bom</artifactId>
@@ -67,7 +67,7 @@ This project includes a Bill Of Materials in order to make it easier to import t
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-        <-- ... -->
+        <!-- ... -->
     </dependencies>
 </dependencyManagement>
 ```
@@ -83,7 +83,7 @@ To use this module, include the following in your ```pom.xml```.
 ```xml
 <dependencyManagement>
     <dependencies>
-        <-- ... -->
+        <!-- ... -->
         <dependency>
             <groupId>com.bellotapps.webapps</groupId>
             <artifactId>webapps-commons-dependencies</artifactId>
@@ -91,7 +91,7 @@ To use this module, include the following in your ```pom.xml```.
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-        <-- ... -->
+        <!-- ... -->
     </dependencies>
 </dependencyManagement>
 ```
