@@ -26,6 +26,12 @@
             <version>${revision}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.bellotapps.webapps</groupId>
+            <artifactId>webapps-commons-repository-utils</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!-- Spring Data Commons -->
         <dependency>
             <groupId>org.springframework.data</groupId>
