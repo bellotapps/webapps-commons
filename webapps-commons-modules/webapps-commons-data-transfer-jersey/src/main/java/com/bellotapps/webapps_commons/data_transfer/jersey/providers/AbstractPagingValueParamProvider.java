@@ -30,8 +30,10 @@ import org.springframework.util.StringUtils;
 
 import javax.ws.rs.QueryParam;
 import java.util.*;
-import java.util.function.*;
-import java.util.stream.Collector;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -319,63 +321,9 @@ public abstract class AbstractPagingValueParamProvider<C, S, P, D> implements Va
                                 .orElse(defaultDirectionProvider.get());
                         return propertySortProvider.apply(property, direction);
                     })
-                    .collect(new PropertySortCollector<>(finisher));
+                    .collect(Collectors.collectingAndThen(Collectors.toList(), finisher));
             // Create the paging information object.
             return pagingDataProvider.provide(pageNumber, pageSize, sort);
-        }
-    }
-
-    /**
-     * A collector that takes instances of objects that indicate how to sort a property,
-     * and builds a sorting information object from them.
-     *
-     * @param <P> The type of the object that indicate how to sort a property.
-     * @param <S> The type of the object that holds sorting information.
-     */
-    private final static class PropertySortCollector<P, S> implements Collector<P, List<P>, S> {
-
-        /**
-         * Function that indicates how to build the sorting information object
-         * from a {@link List} of property sorting information objects.
-         */
-        private final Function<List<P>, S> finisher;
-
-        /**
-         * Constructor.
-         *
-         * @param finisher Function that indicates how to build the sorting information object
-         *                 from a {@link List} of property sorting information objects.
-         */
-        private PropertySortCollector(final Function<List<P>, S> finisher) {
-            this.finisher = finisher;
-        }
-
-        @Override
-        public Supplier<List<P>> supplier() {
-            return LinkedList::new;
-        }
-
-        @Override
-        public BiConsumer<List<P>, P> accumulator() {
-            return List::add;
-        }
-
-        @Override
-        public BinaryOperator<List<P>> combiner() {
-            return (l1, l2) -> {
-                l1.addAll(l2);
-                return l1;
-            };
-        }
-
-        @Override
-        public Function<List<P>, S> finisher() {
-            return finisher;
-        }
-
-        @Override
-        public Set<Characteristics> characteristics() {
-            return Set.of(Characteristics.CONCURRENT);
         }
     }
 
@@ -388,6 +336,14 @@ public abstract class AbstractPagingValueParamProvider<C, S, P, D> implements Va
     @FunctionalInterface
     protected interface PagingDataSupplier<C, S> {
 
+        /**
+         * Provides an paging object instance according to the given elements.
+         *
+         * @param number      The page number.
+         * @param size        The page size.
+         * @param sortingData The object with sorting information.
+         * @return A paging object.
+         */
         C provide(final int number, final int size, final S sortingData);
     }
 
