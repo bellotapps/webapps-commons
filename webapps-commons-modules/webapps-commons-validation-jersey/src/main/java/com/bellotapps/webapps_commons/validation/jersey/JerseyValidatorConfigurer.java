@@ -72,10 +72,30 @@ public class JerseyValidatorConfigurer {
         return configuration.buildValidatorFactory();
     }
 
+    /**
+     * Creates an instance of a {@link ConstraintViolationExceptionCreator}.
+     *
+     * @return The created bean.
+     */
     @Bean
     @ConditionalOnMissingBean
     public ConstraintViolationExceptionCreator defaultConstraintViolationExceptionSupplier() {
         return ConstraintViolationException::new;
+    }
+
+    /**
+     * Creates an instance of a {@link ValidateOnExecutionHandler}.
+     *
+     * @param configuration The {@link javax.validation.Configuration} from where the default
+     *                      {@link javax.validation.executable.ExecutableType} are taken.
+     * @return The created {@link ValidateOnExecutionHandler} instance.
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public ValidateOnExecutionHandler validateOnExecutionHandler(final javax.validation.Configuration configuration) {
+        return new ValidateOnExecutionHandlerImpl(
+                configuration.getBootstrapConfiguration().getDefaultValidatedExecutableTypes()
+        );
     }
 
     /**
@@ -86,6 +106,8 @@ public class JerseyValidatorConfigurer {
      * @param validatorFactory                    The {@link ValidatorFactory}
      *                                            from which the delegate {@link javax.validation.Validator}
      *                                            for the {@link JerseyValidator} is built.
+     * @param validateOnExecutionHandler          A {@link ValidateOnExecutionHandler}
+     *                                            to be used by the {@link JerseyValidator}.
      * @param constraintViolationExceptionCreator The {@link ConstraintViolationExceptionCreator} used by the
      *                                            {@link JerseyValidator}.
      * @return The created {@link JerseyValidator}.
@@ -94,10 +116,13 @@ public class JerseyValidatorConfigurer {
     public ConfiguredValidator jerseyValidator(
             final javax.validation.Configuration configuration,
             final ValidatorFactory validatorFactory,
+            final ValidateOnExecutionHandler validateOnExecutionHandler,
             final ConstraintViolationExceptionCreator constraintViolationExceptionCreator) {
         return new JerseyValidator(
                 validatorFactory.getValidator(),
                 configuration.getBootstrapConfiguration().isExecutableValidationEnabled(),
-                constraintViolationExceptionCreator);
+                validateOnExecutionHandler,
+                constraintViolationExceptionCreator
+        );
     }
 }

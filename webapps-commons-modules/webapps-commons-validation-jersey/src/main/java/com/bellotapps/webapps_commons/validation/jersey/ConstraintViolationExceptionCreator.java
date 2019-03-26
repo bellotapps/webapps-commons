@@ -23,6 +23,8 @@ import java.util.Set;
 /**
  * A {@link ConstraintViolationException} creator used by the {@link JerseyValidator} to create instances of
  * {@link ConstraintViolationException} to be thrown when the validation fails.
+ *
+ * @apiNote Implementations of this interface must be thread-safe.
  */
 @FunctionalInterface
 public interface ConstraintViolationExceptionCreator {

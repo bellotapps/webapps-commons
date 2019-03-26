@@ -18,25 +18,22 @@ package com.bellotapps.webapps_commons.validation.jersey;
 
 import org.glassfish.jersey.server.internal.inject.ConfiguredValidator;
 import org.glassfish.jersey.server.model.Invocable;
-import org.springframework.util.Assert;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.validation.executable.ExecutableValidator;
 import javax.validation.executable.ValidateOnExecution;
 import javax.validation.metadata.BeanDescriptor;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.Method;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * A Concrete implementation of a {@link ConfiguredValidator}.
  */
-public class JerseyValidator<E extends ConstraintViolationException> implements ConfiguredValidator {
+public class JerseyValidator implements ConfiguredValidator {
 
     /**
      * A {@link Validator} to which the validation process is delegated to.
@@ -47,6 +44,8 @@ public class JerseyValidator<E extends ConstraintViolationException> implements 
      * A flag indicating whether execution validation must be performed.
      */
     private final boolean executionValidationEnabled;
+
+    private final ValidateOnExecutionHandler validateOnExecutionHandler;
 
     /**
      * A {@link ConstraintViolationExceptionCreator} that create {@link ConstraintViolationException}s
@@ -60,6 +59,9 @@ public class JerseyValidator<E extends ConstraintViolationException> implements 
      *
      * @param delegate                             A {@link Validator} to which the validation process is delegated to.
      * @param executionValidationEnabled           A flag indicating whether execution validation must be performed.
+     * @param validateOnExecutionHandler           A {@link ValidateOnExecutionHandler} which defines whether a method
+     *                                             must be validated according to the {@link ValidateOnExecution}
+     *                                             annotation.
      * @param constraintViolationExceptionSupplier A {@link ConstraintViolationExceptionCreator}
      *                                             that create {@link ConstraintViolationException}s
      *                                             from a {@link Set} of {@link ConstraintViolation}s.
@@ -67,9 +69,11 @@ public class JerseyValidator<E extends ConstraintViolationException> implements 
     public JerseyValidator(
             final Validator delegate,
             final boolean executionValidationEnabled,
+            final ValidateOnExecutionHandler validateOnExecutionHandler,
             final ConstraintViolationExceptionCreator constraintViolationExceptionSupplier) {
         this.delegate = delegate;
         this.executionValidationEnabled = executionValidationEnabled;
+        this.validateOnExecutionHandler = validateOnExecutionHandler;
         this.constraintViolationExceptionSupplier = constraintViolationExceptionSupplier;
     }
 
@@ -98,14 +102,11 @@ public class JerseyValidator<E extends ConstraintViolationException> implements 
                     handlingMethod.getParameterTypes()
             );
 
-            // Continue only if the methodDescriptor is not null and has constrained parameters
-            if (methodDescriptor != null && methodDescriptor.hasConstrainedParameters()) {
-                final var violations = validateMethod(
-                        resource,
-                        resourceMethod.getDefinitionMethod(),
-                        handlingMethod,
-                        (r, h) -> forExecutables().validateParameters(r, h, args)
-                );
+            // Continue if the methodDescriptor is not null, has constrained parameters, and method must be validated
+            if (methodDescriptor != null
+                    && methodDescriptor.hasConstrainedParameters()
+                    && mustValidateMethod(resource.getClass(), resourceMethod.getDefinitionMethod(), handlingMethod)) {
+                final var violations = forExecutables().validateParameters(resource, handlingMethod, args);
                 constraintViolations.addAll(violations);
             }
         }
@@ -134,24 +135,16 @@ public class JerseyValidator<E extends ConstraintViolationException> implements 
                     handlingMethod.getParameterTypes()
             );
 
-            // Continue only if the methodDescriptor is not null and has constrained return value
-            if (methodDescriptor != null && methodDescriptor.hasConstrainedReturnValue()) {
-                final var resourceViolations = validateMethod(
-                        resource,
-                        resourceMethod.getDefinitionMethod(),
-                        handlingMethod,
-                        (r, h) -> forExecutables().validateReturnValue(r, h, result)
-                );
-                constraintViolations.addAll(resourceViolations);
-
+            // Continue if the methodDescriptor is not null, has constrained return value, and method must be validated
+            if (methodDescriptor != null
+                    && methodDescriptor.hasConstrainedReturnValue()
+                    && mustValidateMethod(resource.getClass(), resourceMethod.getDefinitionMethod(), handlingMethod)) {
+                final var violations = forExecutables().validateReturnValue(resource, handlingMethod, result);
+                constraintViolations.addAll(violations);
                 // In case the result is a Response, validate the contained entity also
                 if (result instanceof Response) {
-                    final var entityViolations = validateMethod(
-                            resource,
-                            resourceMethod.getDefinitionMethod(),
-                            handlingMethod,
-                            (r, h) -> forExecutables().validateReturnValue(r, h, ((Response) result).getEntity())
-                    );
+                    final var entityViolations = forExecutables()
+                            .validateReturnValue(resource, handlingMethod, ((Response) result).getEntity());
                     constraintViolations.addAll(entityViolations);
                 }
             }
@@ -207,78 +200,14 @@ public class JerseyValidator<E extends ConstraintViolationException> implements 
     // ================================================================================================================
 
     /**
-     * A {@link FunctionalInterface} that defines a method that takes a object of type {@code T} and a {@link Method}
-     * and performs the validation of the {@link Method}, which is invoked in the given object.
+     * Wrapper method for {@link ValidateOnExecutionHandler#mustValidateMethod(Class, Method, Method)}
      *
-     * @param <T> The concrete type of object.
-     */
-    @FunctionalInterface
-    private interface MethodValidationProcess<T> {
-
-        /**
-         * Performs the validation process.
-         *
-         * @param resource       The {@link Object} on which the method to validate is invoked.
-         * @param handlingMethod The {@link Method} for which the return value constraints is validated.
-         * @return A {@link Set} with the {@link ConstraintViolation} caused by this validation.
-         * @throws IllegalArgumentException If {@code null} is passed for any of the object,
-         *                                  method or groups parameters or if parameters don't match with each other
-         * @throws ValidationException      If a non recoverable error happens during the
-         *                                  validation process
-         */
-        Set<ConstraintViolation<T>> validate(final T resource, final Method handlingMethod)
-                throws IllegalArgumentException, ValidationException;
-    }
-
-
-    /**
-     * Performs the validation of a {@link Method}, checking before if the validation must be performed,
-     * according to {@link #mustValidateMethod(Class, Method, Method)}.
-     *
-     * @param resource          The {@link Object} on which the method to validate is invoked.
-     * @param definitionMethod  The {@link Method} to be examined.
-     * @param handlingMethod    The {@link Method} used for cache.
-     * @param validationProcess A {@link MethodValidationProcess} for the {@code resource} and {@code handlingMethod}.
-     * @param <T>               The concrete type of the resource.
-     * @return A {@link Set} with the {@link ConstraintViolation} caused by this validation.
-     * @throws IllegalArgumentException If any of the arguments is {@code null}.
-     * @throws ValidationException      If a non recoverable error happens during the validation process.
-     */
-    private static <T> Set<ConstraintViolation<T>> validateMethod(
-            final T resource,
-            final Method definitionMethod,
-            final Method handlingMethod,
-            final MethodValidationProcess<T> validationProcess) throws IllegalArgumentException, ValidationException {
-
-        // First, assert arguments
-        Assert.notNull(resource, "The resource must not be null");
-        Assert.notNull(definitionMethod, "The definition method must not be null");
-        Assert.notNull(handlingMethod, "The handling method must not be null");
-        Assert.notNull(validationProcess, "The validation process must not be null");
-
-        // Then, check if method must be validated. Perform validation if yes, or return an empty set if not.
-        return mustValidateMethod(resource.getClass(), definitionMethod, handlingMethod) ?
-                validationProcess.validate(resource, handlingMethod) :
-                Collections.emptySet();
-    }
-
-    /**
-     * Determine whether the given resource {@code method} to-be-executed on the given {@code klass} should be
-     * validated.
-     * The difference between this and {@link #validateGetter} method is that this method returns {@code true} if the
-     * {@code method} is getter and validating getter method is not explicitly disabled by the
-     * {@link ValidateOnExecution} annotation in the class hierarchy.
-     *
-     * @param clazz            {@link Class} on which the method will be invoked.
-     * @param method           {@link Method} to be examined.
+     * @param clazz            The {@link Class} on which the method will be invoked.
+     * @param method           The {@link Method} to be examined.
      * @param validationMethod {@link Method} used for cache.
      * @return {@code true} if the method should be validated, {@code false} otherwise.
      */
-    private static boolean mustValidateMethod(
-            final Class<?> clazz,
-            final Method method,
-            final Method validationMethod) {
-        return true; // TODO: implement
+    private boolean mustValidateMethod(final Class<?> clazz, final Method method, final Method validationMethod) {
+        return validateOnExecutionHandler.mustValidateMethod(clazz, method, validationMethod);
     }
-
 }
