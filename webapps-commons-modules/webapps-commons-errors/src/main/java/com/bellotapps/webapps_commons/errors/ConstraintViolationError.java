@@ -18,6 +18,7 @@ package com.bellotapps.webapps_commons.errors;
 
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Payload;
@@ -76,7 +77,7 @@ public final class ConstraintViolationError extends EntityError {
      * Creates a {@link ConstraintViolationError} from a {@link ConstraintViolation}.
      *
      * @param violation The {@link ConstraintViolation} from where the error will be built.
-     * @return THe created {@link ConstraintViolationError}.
+     * @return The created {@link ConstraintViolationError}.
      * @apiNote To use this method, the given {@code violation}
      * must have one (and only one) payload of type {@link ErrorCausePayload}
      * (it can have more than one payload, but just one of type {@link ErrorCausePayload}).
@@ -90,9 +91,9 @@ public final class ConstraintViolationError extends EntityError {
                 .findFirst() // Just the first one (more than one: unexpected behaviour, as only the first one is used).
                 .map(ErrorCause::getByPayloadClass) // Map to an ErrorCause value
                 .orElse(ErrorCause.UNKNOWN); // Unknown error cause if no payload of type ErrorCausePayload.
-        final var field = violation.getPropertyPath().toString();
+        final var path = StringUtils.delimitedListToStringArray(violation.getPropertyPath().toString(), ".", null);
         final var message = violation.getMessageTemplate();
-        return new ConstraintViolationError(errorCause, field, message);
+        return new ConstraintViolationError(errorCause, path[path.length - 1], message);
     }
 
 
