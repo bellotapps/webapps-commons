@@ -38,6 +38,11 @@
             </dependency>
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
+                <artifactId>webapps-commons-validation-jersey</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-error-dtos</artifactId>
                 <version>${revision}</version>
             </dependency>
