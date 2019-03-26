@@ -16,7 +16,7 @@
 
 package com.bellotapps.webapps_commons.persistence.spring_data;
 
-import com.bellotapps.webapps_commons.persistence.repository_utils.SortingData;
+import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.SortingData;
 import org.springframework.data.domain.Sort;
 
 import java.util.stream.Collectors;
