@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bellotapps.webapps_commons.persistence.repository_utils;
+package com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting;
 
 
 /**

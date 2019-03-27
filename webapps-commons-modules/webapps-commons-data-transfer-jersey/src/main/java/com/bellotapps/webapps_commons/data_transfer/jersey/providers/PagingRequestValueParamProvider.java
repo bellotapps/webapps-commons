@@ -17,10 +17,10 @@
 package com.bellotapps.webapps_commons.data_transfer.jersey.providers;
 
 
-import com.bellotapps.webapps_commons.persistence.repository_utils.PagingRequest;
-import com.bellotapps.webapps_commons.persistence.repository_utils.SortingData;
-import com.bellotapps.webapps_commons.persistence.repository_utils.SortingData.PropertySort;
-import com.bellotapps.webapps_commons.persistence.repository_utils.SortingData.SortDirection;
+import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.PagingRequest;
+import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.SortingData;
+import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.SortingData.PropertySort;
+import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.SortingData.SortDirection;
 import org.glassfish.jersey.internal.inject.InjectionManager;
 
 import javax.inject.Inject;

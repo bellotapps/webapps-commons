@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.bellotapps.webapps_commons.persistence.spring_data;
+package com.bellotapps.webapps_commons.persistence.spring_data.repository_utils_adapters.paging_and_sorting;
 
-import com.bellotapps.webapps_commons.persistence.repository_utils.Page;
-import com.bellotapps.webapps_commons.persistence.repository_utils.PagingRequest;
+import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.Page;
+import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.PagingRequest;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
