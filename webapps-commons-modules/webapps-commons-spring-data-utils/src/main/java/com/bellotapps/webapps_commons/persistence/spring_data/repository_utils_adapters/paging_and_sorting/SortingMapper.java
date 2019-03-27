@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bellotapps.webapps_commons.persistence.spring_data;
+package com.bellotapps.webapps_commons.persistence.spring_data.repository_utils_adapters.paging_and_sorting;
 
 import com.bellotapps.webapps_commons.persistence.repository_utils.paging_and_sorting.SortingData;
 import org.springframework.data.domain.Sort;
