@@ -72,6 +72,12 @@ import java.util.List;
             .withPayload(HttpStatus.INTERNAL_SERVER_ERROR.getCode(), ServerErrorDto.BASIC_SERVER_ERROR_DTO);
 
     /**
+     * {@link HandlingResult} to be sent when trying to invoke an operation that is not implemented yet.
+     */
+    /* package */ static final HandlingResult<ServerErrorDto> NOT_IMPLEMENTED = HandlingResult
+            .withPayload(HttpStatus.NOT_IMPLEMENTED.getCode(), ServerErrorDto.NOT_IMPLEMENTED_ERROR_DTO);
+
+    /**
      * {@link HandlingResult} to be sent when an external service (i.e web service, database, etc.) is not available.
      */
     /* package */ static final HandlingResult<ServerErrorDto> SERVICE_UNAVAILABLE = HandlingResult

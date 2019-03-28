@@ -31,10 +31,16 @@ public class ServerErrorDto extends ApiErrorDto {
     }
 
     /**
-     * A {@link ServerErrorDto} to be sent when not being able to access the database.
+     * A {@link ServerErrorDto} to be sent when not being able to access external services.
      */
     public static final ServerErrorDto SERVICE_UNAVAILABLE_ERROR_DTO =
             new ServerErrorDto("The service is currently unavailable");
+
+    /**
+     * A {@link ServerErrorDto} to be sent when trying to invoke an operation that is not implemented yet.
+     */
+    public static final ServerErrorDto NOT_IMPLEMENTED_ERROR_DTO =
+            new ServerErrorDto("The operation is not implemented yet.");
 
     /**
      * A {@link ServerErrorDto} to be sent when unexpected errors occur (i.e a non-caught exception).
